@@ -6,17 +6,23 @@ import style from "./materialize.module.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormGroup from "@mui/material/FormGroup";
-import { Button } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import Image from "next/image";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
+import Divider from "@mui/material/Divider";
+import Facebook from "@mui/icons-material/Facebook";
+import Twitter from "@mui/icons-material/Twitter";
+import GitHub from "@mui/icons-material/GitHub";
+import GoogleIcon from "@mui/icons-material/Google";
 
 export default function HomePage() {
   return (
     <Layout
       maskImg={<Image src={require("./assets/auth-v2-login-mask-light.png")} />}
-      image={<Image src={require("./assets/bg.png")} />}
+      image={<Image className={style.bgImg} src={require("./assets/bg.png")} />}
     >
       <Stack className={style.formBox} sx={{ width: "100%" }}>
         <Box
@@ -129,6 +135,37 @@ export default function HomePage() {
             <Link href="#" underline="none" sx={{ fontSize: "16px" }}>
               Create an account
             </Link>
+          </Box>
+          <Divider
+            sx={{
+              fontSize: "16px",
+              color: "#4C4E64DE",
+              textAlign: "center",
+              padding: "20px 0 30px",
+            }}
+          >
+            <Typography variant="p">or</Typography>
+          </Divider>
+          <Box
+            sx={{
+              height: "40px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <IconButton>
+              <Facebook sx={{ color: "#497ce2" }} />
+            </IconButton>
+            <IconButton>
+              <Twitter sx={{ color: "#1da1f2" }} />
+            </IconButton>
+            <IconButton>
+              <GitHub sx={{ color: "#272727" }} />
+            </IconButton>
+            <IconButton>
+              <GoogleIcon sx={{ color: "#dc483b" }} />
+            </IconButton>
           </Box>
         </Box>
       </Stack>

@@ -1,8 +1,9 @@
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import React from "react";
 import style from "../materialize.module.css";
+import Logo from "../assets/Logo";
+import Typography from "@mui/material/Typography";
 
 export default function Layout({ maskImg, children, image }) {
   return (
@@ -16,23 +17,38 @@ export default function Layout({ maskImg, children, image }) {
         display: "flex",
       }}
     >
-      <div
-        className={style.contentContainer}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "relative",
-        }}
-      >
-        <Box sx={{ position: "absolute", bottom: "63.925px" }}>{maskImg}</Box>
+      <div className={style.contentContainer}>
         <Box
           sx={{
-            width: "80%",
+            position: "absolute",
+            top: "30px",
+            left: "40px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "8px",
           }}
         >
-          <Stack sx={{ padding: "80px 0 80px 80px" }}>{image}</Stack>
+          <Logo />
+          <Typography
+            variant="h6"
+            sx={{
+              fontSize: "24px",
+              fontWeight: 600,
+              color: "rgba(76, 78, 100, 0.87)",
+              letterSpacing: "0.18px",
+            }}
+          >
+            Materialize
+          </Typography>
         </Box>
+        <div
+          className={style.imageCover}
+         
+        >
+          <Stack className={style.imageContainer}>{image}</Stack>
+        </div>
+        <Box sx={{ position: "absolute", bottom: "63.925px" }}>{maskImg}</Box>
       </div>
       <div
         className={style.formContainer}
