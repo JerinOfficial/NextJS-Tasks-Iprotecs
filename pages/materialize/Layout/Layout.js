@@ -42,13 +42,10 @@ export default function Layout({ maskImg, children, image }) {
             Materialize
           </Typography>
         </Box>
-        <div
-          className={style.imageCover}
-         
-        >
+        <div className={style.imageCover}>
           <Stack className={style.imageContainer}>{image}</Stack>
         </div>
-        <Box sx={{ position: "absolute", bottom: "63.925px" }}>{maskImg}</Box>
+        <div className={style.maskImgContainer}>{maskImg}</div>
       </div>
       <div
         className={style.formContainer}
@@ -58,8 +55,25 @@ export default function Layout({ maskImg, children, image }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          flexDirection: "column",
         }}
       >
+        <Stack className={style.resFormContainer}>
+          <div className={style.resForm}>
+            <Logo />
+            <Typography
+              variant="h6"
+              sx={{
+                fontSize: "24px",
+                fontWeight: 600,
+                color: "rgba(76, 78, 100, 0.87)",
+                letterSpacing: "0.18px",
+              }}
+            >
+              Materialize
+            </Typography>
+          </div>
+        </Stack>
         {children}
       </div>
     </Stack>

@@ -5,23 +5,24 @@
 /* body{
     background-color: rgba(183, 183, 183, 0.297);
 } */
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-.reveal{
-    position: relative;
-    transform: translateY(10px);
-    opacity: 0;
-    transition: all 1s ease;
-  }
-  .reveal.active{
-    transform: translateY(0px);
-    opacity: 1;
-  }
-/* @media (max-width:1050px) {
-  body{
-    display: none;
-  }
-} */
+body {
+  background-color: #f7f7f9;
+}
+.reveal {
+  position: relative;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 1s ease;
+}
+.reveal.active {
+  transform: translateY(0px);
+  opacity: 1;
+}
+html {
+  background-color: #f7f7f9;
+}

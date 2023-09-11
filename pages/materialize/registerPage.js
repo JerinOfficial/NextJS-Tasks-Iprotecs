@@ -25,20 +25,40 @@ import { FormControl } from "@mui/material";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function HomePage() {
+export default function RegisterPage() {
   const [hidePw, sethidePw] = useState(false);
   const [formDatas, setformDatas] = useState({
-    email: "admin@materialize.com",
-    password: "admin",
+    name: "",
+    email: "",
+    password: "",
   });
-  const { email, password } = formDatas;
+  const { email, password, name } = formDatas;
+  const [nameErr, setnameErr] = useState(false);
   const [emailErr, setemailErr] = useState(false);
   const [passwordErr, setpasswordErr] = useState(false);
   const [errAlert, seterrAlert] = useState({
+    name: "name is a required field",
     email: "email is a required field",
     password: "password must be at least 5 characters",
   });
 
+  const nameOnchangeHandler = (e) => {
+    setformDatas({ ...formDatas, name: e.target.value });
+  };
+  const emailOnchangeHandler = (e) => {
+    setformDatas({ ...formDatas, email: e.target.value });
+  };
+  const passwordOnchangeHandler = (e) => {
+    setformDatas({ ...formDatas, password: e.target.value });
+  };
+
+  const unameBlurHandler = () => {
+    if (name === "") {
+      setnameErr(true);
+    } else {
+      setnameErr(false);
+    }
+  };
   const emailBlurHandler = () => {
     if (email === "") {
       setemailErr(true);
@@ -59,13 +79,6 @@ export default function HomePage() {
     }
   };
 
-  const emailOnchangeHandler = (e) => {
-    setformDatas({ ...formDatas, email: e.target.value });
-  };
-  const passwordOnchangeHandler = (e) => {
-    setformDatas({ ...formDatas, password: e.target.value });
-  };
-
   const validation = () => {
     if (email === "") {
       setemailErr(true);
@@ -82,34 +95,36 @@ export default function HomePage() {
     } else {
       setpasswordErr(false);
     }
+    if (name === "") {
+      setnameErr(true);
+    } else {
+      setnameErr(false);
+    }
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (email !== "" && password !== "") {
+    if (email !== "" && password !== "" && name !== "") {
       console.log(formDatas, "form");
       setemailErr(false);
       setpasswordErr(false);
+      setnameErr(false);
       validation();
     } else {
       setemailErr(true);
       setpasswordErr(true);
+      setnameErr(true);
     }
   };
 
   return (
     <Layout
-      maskImg={
-        <Image
-          alt="mask"
-          src={require("./assets/auth-v2-login-mask-light.png")}
-        />
-      }
+      maskImg={<Image alt="mask" src={require("./assets/register-mask.png")} />}
       image={
         <Image
           alt="bg"
           className={style.bgImg}
-          src={require("./assets/bg.png")}
+          src={require("./assets/registerBg.png")}
         />
       }
     >
@@ -142,7 +157,7 @@ export default function HomePage() {
                 letterSpacing: "0.18px",
               }}
             >
-              Welcome to Materialize! 👋🏻
+              Adventure starts here 🚀
             </Typography>
             <Typography
               sx={{
@@ -151,32 +166,10 @@ export default function HomePage() {
                 letterSpacing: "0.15px",
               }}
             >
-              Please sign-in to your account and start the adventure
+              Make your app management easy and fun!
             </Typography>
           </Box>
-          <Box
-            sx={{
-              color: "rgb(102, 108, 255)",
-              backgroundColor: "rgba(102, 108, 255, 0.12)",
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column",
-              fontSize: "12px",
-              letterSpacing: ".4px",
-              padding: "12px 16px",
-              borderRadius: "8px",
-              marginBottom: "24px",
-            }}
-          >
-            <span>
-              Admin: <strong>admin@materialize.com</strong> / Pass:
-              <strong>admin</strong>
-            </span>
-            <span>
-              Client: <strong>client@materialize.com</strong> / Pass:
-              <strong>client</strong>
-            </span>
-          </Box>
+
           <form
             onSubmit={(e) => {
               submitHandler(e);
@@ -184,11 +177,28 @@ export default function HomePage() {
             style={{ display: "flex", gap: "15px", flexDirection: "column" }}
           >
             <TextField
+              onBlur={unameBlurHandler}
+              error={nameErr && true}
+              type="text"
+              label="Username"
+              placeholder="johndoe"
+              helperText={nameErr && errAlert.name}
+              value={name}
+              onChange={nameOnchangeHandler}
+              inputProps={{ style: { color: "#677086" } }}
+              InputProps={{
+                style: {
+                  borderRadius: "8px",
+                },
+              }}
+              autoFocus
+            />
+            <TextField
               onBlur={emailBlurHandler}
               error={emailErr && true}
               type="email"
               label="Email"
-              placeholder="admin@materialize.com"
+              placeholder="user@materialize.com"
               helperText={emailErr && errAlert.email}
               value={email}
               onChange={emailOnchangeHandler}
@@ -198,7 +208,6 @@ export default function HomePage() {
                   borderRadius: "8px",
                 },
               }}
-              autoFocus
             />
             <FormControl sx={{ position: "relative" }}>
               <TextField
@@ -244,23 +253,22 @@ export default function HomePage() {
               className={style.resBox1}
               style={{
                 display: "flex",
-                justifyContent: "space-between",
                 marginBottom: "1px",
               }}
             >
               <FormControlLabel
                 control={<Checkbox defaultChecked />}
-                label="Remember Me"
+                label="I agree to"
                 sx={{ color: "#4C4E6499" }}
                 className={style.resPara}
               />
               <Link
-                href="/materialize/forgetPwPage"
+                href="#"
                 underline="none"
                 sx={{ fontSize: "14px" }}
                 className={style.resPara}
               >
-                Forgot Password?
+                privacy policy & terms
               </Link>
             </div>
 
@@ -274,7 +282,7 @@ export default function HomePage() {
                 borderRadius: "10px",
               }}
             >
-              login
+              sign up
             </Button>
           </form>
           <div
@@ -295,14 +303,14 @@ export default function HomePage() {
               c
               sx={{ color: "#4C4E6499" }}
             >
-              New on our platform?
+              Already have an account?
             </Typography>
             <Link
               className={`${inter.className}`}
-              href="/materialize/registerPage"
+              href="/materialize/homePage"
               underline="none"
             >
-              Create an account
+              Sign in instead
             </Link>
           </div>
           <Divider
